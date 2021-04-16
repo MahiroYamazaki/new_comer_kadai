@@ -9,17 +9,20 @@ for record in SeqIO.parse(fasta_in, 'fasta'):
     desc_part = record.description
     seq = record.seq
 
-rev = ''
+def reverse(text):
+    ans = ''
+    for char in text:
+        if char == 'A':
+            ans = 'T' + ans
+        elif char == 'T':
+            ans = 'A' + ans
+        elif char == 'G':
+            ans = 'C' + ans
+        elif char == 'C':
+            ans = 'G' + ans
+    return ans
 
-for char in seq:
-    if char == 'A':
-        rev = 'T' + rev
-    elif char == 'T':
-        rev = 'A' + rev
-    elif char == 'G':
-        rev = 'C' + rev
-    elif char == 'C':
-        rev = 'G' + rev
+rev = reverse(seq)
 
 list = []
 list_rev = []
