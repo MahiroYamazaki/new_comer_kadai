@@ -58,6 +58,7 @@ if __name__ == "__main__":
 
     # split into train dataset and validation dataset (not train-test splitting)
     train_df, val_df = train_test_split(train_val_df, random_state=0)  #訓練用データを分割
+    del train_val_df
 
     # encode an amino acids sequence into a numerical vector
     # MUST use the same transformer for all data without refit
@@ -65,15 +66,19 @@ if __name__ == "__main__":
     # extract subsequence
     window_radius = args.window_radius
     train_data_ = generate_input(train_df, window_radius)
+    del train_df
     onehot = OneHotEncoder().fit(train_data_)
     pca = TruncatedSVD(n_components=482)
     n = 482
     train_data  = onehot.transform(train_data_)
+    y_train = generate_label(train_df)
     del train_data_
     pca.fit(train_data)
     X_train = pca.transform(train_data)
 
     val_data_   = generate_input(val_df, window_radius)
+    y_val   = generate_label(val_df)
+    del val_df
     val_data    = onehot.transform(val_data_)
     del val_data_
     X_val = pca.transform(val_data)
@@ -84,14 +89,8 @@ if __name__ == "__main__":
 
     # extract label information
     # Note: NO LABEL INFORMATION for test dataset
-    train_label = generate_label(train_df)
-    val_label   = generate_label(val_df)
+
     # test_label = None
-
-
-    # rename for interpretability
-    y_train = train_label
-    y_val   = val_label
 
     ###### 2. model construction (w/ training dataset) ######
 
