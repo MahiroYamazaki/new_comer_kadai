@@ -7,6 +7,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
 #追加したimport
 from sklearn.decomposition import TruncatedSVD
+import scipy.stats
 import time
 
 def check_args(args):
