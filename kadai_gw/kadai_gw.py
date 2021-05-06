@@ -45,7 +45,7 @@ if __name__ == "__main__":
     parser.add_argument("-train", help="path to training data (required)")
     parser.add_argument("-test", help="path to test data (optional)")
     parser.add_argument("-out", help="path to predicted information for test data (required only if --test is set)")
-    parser.add_argument("--window_radius", type=int, default=15)
+    parser.add_argument("--window_radius", type=int, default=20)
     args = parser.parse_args()
 
     check_args(args)
@@ -67,8 +67,8 @@ if __name__ == "__main__":
     window_radius = args.window_radius
     train_data_ = generate_input(train_df, window_radius)
     onehot = OneHotEncoder().fit(train_data_)
-    pca = TruncatedSVD(n_components=482)
-    n = 482
+    pca = TruncatedSVD(n_components=900)
+    n = 900
     train_data  = onehot.transform(train_data_)
     del train_data_
     y_train = generate_label(train_df)
