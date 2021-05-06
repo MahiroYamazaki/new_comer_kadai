@@ -7,6 +7,10 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
 #追加したimport
 from sklearn.decomposition import TruncatedSVD
+from sklearn.naive_bayes import GaussianNB
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.ensemble import RandomForestClassifier
+from sklearn import svm
 import time
 
 def check_args(args):
@@ -45,7 +49,7 @@ if __name__ == "__main__":
     parser.add_argument("-train", help="path to training data (required)")
     parser.add_argument("-test", help="path to test data (optional)")
     parser.add_argument("-out", help="path to predicted information for test data (required only if --test is set)")
-    parser.add_argument("--window_radius", type=int, default=20)
+    parser.add_argument("--window_radius", type=int, default=1)
     args = parser.parse_args()
 
     check_args(args)
@@ -67,8 +71,8 @@ if __name__ == "__main__":
     window_radius = args.window_radius
     train_data_ = generate_input(train_df, window_radius)
     onehot = OneHotEncoder().fit(train_data_)
-    pca = TruncatedSVD(n_components=900)
-    n = 900
+    pca = TruncatedSVD(n_components=64)
+    n = 64
     train_data  = onehot.transform(train_data_)
     del train_data_
     y_train = generate_label(train_df)
@@ -94,18 +98,22 @@ if __name__ == "__main__":
 
     ###### 2. model construction (w/ training dataset) ######
 
-    lr = LogisticRegression()
-    model = lr.fit(X_train, y_train)
+    # clf = GaussianNB()
+    # clf = QuadraticDiscriminantAnalysis()
+    # lr = LogisticRegression()
+    # clf = RandomForestClassifier(max_depth=2, random_state=0)
+    clf = svm.SVC()
+    model = clf.fit(X_train, y_train)
 
     ###### 3. model evaluation (w/ validation dataset) ######
 
     score = model.score(X_val, y_val)  #デフォルト
-    auc = roc_auc_score(y_val, model.predict_proba(X_val)[:, 1])  #デフォルト
+    # auc = roc_auc_score(y_val, model.predict_proba(X_val)[:, 1])  #デフォルト
 
     print('window_radius: %d'%(window_radius))
     print('n: %d'%(n))
     print('Q2 accuracy: %.4f'%(score))
-    print('AUC: %.4f'%(auc))  #デフォルト
+    # print('AUC: %.4f'%(auc))  #デフォルト
 
     # ###### 4. prediction for test dataset ######
     #
