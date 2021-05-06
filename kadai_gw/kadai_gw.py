@@ -94,22 +94,18 @@ if __name__ == "__main__":
 
     ###### 2. model construction (w/ training dataset) ######
 
-    # clf = GaussianNB()
-    # clf = QuadraticDiscriminantAnalysis()
     lr = LogisticRegression()
-    # clf = RandomForestClassifier(max_depth=2, random_state=0)
-    # clf = svm.SVC()
     model = lr.fit(X_train, y_train)
 
     ###### 3. model evaluation (w/ validation dataset) ######
 
     score = model.score(X_val, y_val)  #デフォルト
-    # auc = roc_auc_score(y_val, model.predict_proba(X_val)[:, 1])  #デフォルト
+    auc = roc_auc_score(y_val, model.predict_proba(X_val)[:, 1])  #デフォルト
 
     print('window_radius: %d'%(window_radius))
     print('n: %d'%(n))
     print('Q2 accuracy: %.4f'%(score))
-    # print('AUC: %.4f'%(auc))  #デフォルト
+    print('AUC: %.4f'%(auc))  #デフォルト
 
     # ###### 4. prediction for test dataset ######
     #
