@@ -66,13 +66,13 @@ if __name__ == "__main__":
     # extract subsequence
     window_radius = args.window_radius
     train_data_ = generate_input(train_df, window_radius)
-    del train_df
     onehot = OneHotEncoder().fit(train_data_)
     pca = TruncatedSVD(n_components=482)
     n = 482
     train_data  = onehot.transform(train_data_)
-    y_train = generate_label(train_df)
     del train_data_
+    y_train = generate_label(train_df)
+    del train_df
     pca.fit(train_data)
     X_train = pca.transform(train_data)
 
