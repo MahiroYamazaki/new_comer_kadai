@@ -7,10 +7,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
 #追加したimport
 from sklearn.decomposition import TruncatedSVD
-from sklearn.naive_bayes import GaussianNB
-from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
-from sklearn.ensemble import RandomForestClassifier
-from sklearn import svm
 import time
 
 def check_args(args):
@@ -49,7 +45,7 @@ if __name__ == "__main__":
     parser.add_argument("-train", help="path to training data (required)")
     parser.add_argument("-test", help="path to test data (optional)")
     parser.add_argument("-out", help="path to predicted information for test data (required only if --test is set)")
-    parser.add_argument("--window_radius", type=int, default=1)
+    parser.add_argument("--window_radius", type=int, default=16)
     args = parser.parse_args()
 
     check_args(args)
@@ -71,8 +67,8 @@ if __name__ == "__main__":
     window_radius = args.window_radius
     train_data_ = generate_input(train_df, window_radius)
     onehot = OneHotEncoder().fit(train_data_)
-    pca = TruncatedSVD(n_components=64)
-    n = 64
+    n = 724
+    pca = TruncatedSVD(n_components=n)
     train_data  = onehot.transform(train_data_)
     del train_data_
     y_train = generate_label(train_df)
@@ -100,10 +96,10 @@ if __name__ == "__main__":
 
     # clf = GaussianNB()
     # clf = QuadraticDiscriminantAnalysis()
-    # lr = LogisticRegression()
+    lr = LogisticRegression()
     # clf = RandomForestClassifier(max_depth=2, random_state=0)
-    clf = svm.SVC()
-    model = clf.fit(X_train, y_train)
+    # clf = svm.SVC()
+    model = lr.fit(X_train, y_train)
 
     ###### 3. model evaluation (w/ validation dataset) ######
 
