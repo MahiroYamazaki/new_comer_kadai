@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
     ###### 2. model construction (w/ training dataset) ######
 
-    lr = LogisticRegression(C=1000)
+    lr = LogisticRegression(random_state = 1)
     model = lr.fit(X_train, y_train)
 
     ###### 3. model evaluation (w/ validation dataset) ######

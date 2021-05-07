@@ -1,0 +1,54 @@
+<lr>
+window_radius: 6
+n: 284
+Q2 accuracy: 0.8025
+AUC: 0.7710
+elapsed_time:371.63214111328125[sec]
+
+window_radius: 7
+n: 328
+Q2 accuracy: 0.8037
+AUC: 0.7755
+elapsed_time:481.51996326446533[sec]
+
+window_radius: 8
+n: 372
+Q2 accuracy: 0.8046
+AUC: 0.7783
+elapsed_time:824.6606709957123[sec]
+
+window_radius: 9
+n: 416
+Q2 accuracy: 0.8050
+AUC: 0.7799
+elapsed_time:1267.019774198532[sec]
+
+window_radius: 10
+n= 460
+Q2 accuracy: 0.8049
+AUC: 0.7807
+elapsed_time:1519.189705133438[sec]
+
+window_radius: 15
+n: 482
+Q2 accuracy: 0.8045
+AUC: 0.7785
+
+window_radius: 50
+n: 300
+Q2 accuracy: 0.7892
+AUC: 0.7376
+elapsed_time:951.475887298584[sec]
+
+<rfc>
+window_radius: 1
+n: 64
+Q2 accuracy: 0.7747
+AUC: 0.6731
+elapsed_time:351.20025992393494[sec]
+
+window_radius: 3
+n: 152
+Q2 accuracy: 0.7747
+AUC: 0.6820
+elapsed_time:817.8913772106171[sec]
