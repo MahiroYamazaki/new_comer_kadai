@@ -40,7 +40,7 @@ def generate_label(df):
 
 if __name__ == "__main__":
 
-    start = time.time()
+    # start = time.time()
 
     parser = argparse.ArgumentParser(description="example program")
     parser.add_argument("-train", help="path to training data (required)")
@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
     ###### 2. model construction (w/ training dataset) ######
 
-    lr = LogisticRegression(random_state = 1)
+    lr = LogisticRegression(random_state=1, max_iter=300)
     model = lr.fit(X_train, y_train)
 
     ###### 3. model evaluation (w/ validation dataset) ######
@@ -130,5 +130,5 @@ if __name__ == "__main__":
             })
         predicted_df.to_csv(args.out, index=None)
 
-    elapsed_time = time.time() - start
-    print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
+    # elapsed_time = time.time() - start
+    # print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
