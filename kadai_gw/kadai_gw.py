@@ -100,13 +100,13 @@ if __name__ == "__main__":
 
     ###### 3. model evaluation (w/ validation dataset) ######
 
-    score = model.score(X_val, y_val)  #デフォルト
-    auc = roc_auc_score(y_val, model.predict_proba(X_val)[:, 1])  #デフォルト
+    score = model.score(X_val, y_val)
+    auc = roc_auc_score(y_val, model.predict_proba(X_val)[:, 1])
 
-    print('window_radius: %d'%(window_radius))
-    print('n: %d'%(n))
+    # print('window_radius: %d'%(window_radius))
+    # print('n: %d'%(n))
     print('Q2 accuracy: %.4f'%(score))
-    print('AUC: %.4f'%(auc))  #デフォルト
+    print('AUC: %.4f'%(auc))
 
     ###### 4. prediction for test dataset ######
 
